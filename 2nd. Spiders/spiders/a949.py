@@ -15,7 +15,9 @@ class A949Spider(scrapy.Spider):
         
         for sel in response.xpath('//div/div/div/div/ul/li/div/div/a/span'):
             item = CancionItem()
-            item['cancion'] = sel.xpath('text()').extract();
+            temp = sel.xpath('text()').extract().split(' - ');
+            item['cancion'] = temp[0];
+            item['artista'] = temp[1];
             
         
             yield item
